@@ -57,7 +57,8 @@ export default function SearchBar() {
       onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
-        push(`/?q=${formData.get('q')}`);
+        const q = (formData.get('q') as string).trim();
+        push(q ? `/?q=${encodeURIComponent(q)}` : '/');
       }}
     />
   );
