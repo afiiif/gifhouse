@@ -18,6 +18,7 @@
     "code-check": "yarn format:fix && yarn lint && yarn lint:types"
   },
   "dependencies": {
+    "@tabler/icons-react": "^2.22.0",
     "clsx": "~1.2.1",
     "next": "~13.4.6",
     "react": "~18.2.0",

@@ -1,6 +1,10 @@
 import './globals.css';
 
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
+import Link from 'next/link';
+import { IconHeart, IconLogin, IconSearch, IconSparkles, IconUser } from '@tabler/icons-react';
+
+import HomeLink, { HomeLinkDumbComponent } from './layout/HomeLink';
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,7 +17,58 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <nav className="pointer-events-none sticky top-0 z-30 w-full bg-white backdrop-blur supports-[backdrop-filter:blur(0)]:bg-white/60">
+          <div className="mx-auto flex max-w-7xl items-center border-b px-3 py-3 lg:px-5 [&>*]:pointer-events-auto">
+            <Suspense
+              // https://nextjs.org/docs/messages/deopted-into-client-rendering
+              fallback={<HomeLinkDumbComponent />}
+            >
+              <HomeLink />
+            </Suspense>
+
+            <div className="hidden items-center lg:flex">
+              <Link href="/trending" className="flex gap-1 p-3">
+                <IconSparkles />
+                <div>Trending</div>
+              </Link>
+              <Link href="/" className="mr-3 p-3">
+                My Favs
+              </Link>
+              <IconLogin />
+              <Link href="/login" className="px-1 py-3">
+                Login
+              </Link>
+              <div>/</div>
+              <Link href="/register" className="px-1 py-3">
+                Register
+              </Link>
+            </div>
+          </div>
+        </nav>
+
+        <nav className="fixed bottom-0 z-30 flex w-full justify-around border-t bg-white text-xs lg:hidden">
+          <Link href="/" className="flex w-full flex-col items-center p-3">
+            <IconSearch />
+            <div className="pt-1">Search</div>
+          </Link>
+          <Link href="/trending" className="flex w-full flex-col items-center p-3">
+            <IconSparkles />
+            <div className="pt-1">Trending</div>
+          </Link>
+          <Link href="/" className="flex w-full flex-col items-center p-3">
+            <IconHeart />
+            <div className="pt-1">My Favs</div>
+          </Link>
+          <Link href="/login" className="flex w-full flex-col items-center p-3">
+            <IconUser />
+            <div className="pt-1">Account</div>
+          </Link>
+        </nav>
+
+        <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+        <div className="pt-16" />
+      </body>
     </html>
   );
 }
