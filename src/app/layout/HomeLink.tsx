@@ -14,7 +14,7 @@ export function HomeLinkDumbComponent({ keyword }: Props) {
       href="/"
       className={clsx(
         'group relative mr-auto flex items-center p-1.5 text-2xl transition-all',
-        keyword ? '-top-12 md:top-0' : 'top-0',
+        keyword ? '-top-14 md:top-0' : 'top-0',
       )}
     >
       <IconPhotoHeart size={32} className="-rotate-6 transition-transform group-hover:rotate-12" />
