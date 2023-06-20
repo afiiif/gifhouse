@@ -18,6 +18,8 @@
     "code-check": "yarn format:fix && yarn lint && yarn lint:types"
   },
   "dependencies": {
+    "@giphy/js-fetch-api": "^4.9.3",
+    "@giphy/react-components": "^6.9.4",
     "@tabler/icons-react": "^2.22.0",
     "clsx": "~1.2.1",
     "next": "~13.4.6",

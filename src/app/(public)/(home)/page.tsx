@@ -1,6 +1,9 @@
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
 
 import SearchBar, { SearchBarDumbComponent } from './SearchBar';
+
+const GifGrid = dynamic(() => import('./GifGrid'), { ssr: false });
 
 export default function HomePage() {
   return (
@@ -9,6 +12,7 @@ export default function HomePage() {
       fallback={<SearchBarDumbComponent />}
     >
       <SearchBar />
+      <GifGrid />
     </Suspense>
   );
 }
