@@ -29,6 +29,7 @@ const globalRules = {
   'unicorn/prefer-top-level-await': 'off',
   'unicorn/new-for-builtins': 'off',
   'unicorn/filename-case': 'off',
+  'unicorn/no-useless-undefined': 'off',
 
   'sonarjs/prefer-single-boolean-return': 'error',
   'sonarjs/no-nested-template-literals': 'error',

@@ -4,6 +4,7 @@ import { ReactNode, Suspense } from 'react';
 import { IconHeart, IconSearch, IconSparkles, IconUser } from '@tabler/icons-react';
 
 import AuthListener from './headless/AuthListener';
+import FavoriteGifsListener from './headless/FavoriteGifsListener';
 import HomeLink, { HomeLinkDumbComponent } from './layout/HomeLink';
 import LoginOrProfile, { LoginOrProfileBottomNav } from './layout/LoginOrProfile';
 import NavLink from './layout/NavLink';
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body>
         <AuthListener />
+        <FavoriteGifsListener />
 
         <nav className="pointer-events-none sticky top-0 z-30 w-full bg-white">
           <div className="mx-auto flex max-w-7xl items-center border-b px-3 py-3 lg:px-5 [&>*]:pointer-events-auto">
