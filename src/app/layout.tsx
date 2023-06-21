@@ -1,10 +1,11 @@
 import './globals.css';
 
 import { ReactNode, Suspense } from 'react';
-import { IconHeart, IconLogin, IconSearch, IconSparkles, IconUser } from '@tabler/icons-react';
+import { IconHeart, IconSearch, IconSparkles, IconUser } from '@tabler/icons-react';
 
 import Auth from './layout/Auth';
 import HomeLink, { HomeLinkDumbComponent } from './layout/HomeLink';
+import LoginOrProfile, { LoginOrProfileBottomNav } from './layout/LoginOrProfile';
 import NavLink from './layout/NavLink';
 
 export const metadata = {
@@ -33,35 +34,13 @@ export default function RootLayout({ children }: Props) {
             <div className="hidden items-center lg:flex">
               <NavLink
                 href="/trending"
-                className="flex gap-1 p-3"
+                className="flex gap-1 px-4 py-3"
                 activeClassName="text-fuchsia-600 underline decoration-fuchsia-600 decoration-2 underline-offset-8"
               >
                 <IconSparkles />
                 <div>Trending</div>
               </NavLink>
-              <NavLink
-                href="/favorites"
-                className="mr-3 p-3"
-                activeClassName="text-fuchsia-600 underline decoration-fuchsia-600 decoration-2 underline-offset-8"
-              >
-                My Favs
-              </NavLink>
-              <NavLink
-                href="/login"
-                className="flex px-1 py-3"
-                activeClassName="text-fuchsia-600 underline decoration-fuchsia-600 decoration-2 underline-offset-8"
-              >
-                <IconLogin />
-                <div>Login</div>
-              </NavLink>
-              <div>/</div>
-              <NavLink
-                href="/register"
-                className="px-1 py-3"
-                activeClassName="text-fuchsia-600 underline decoration-fuchsia-600 decoration-2 underline-offset-8"
-              >
-                Register
-              </NavLink>
+              <LoginOrProfile />
             </div>
           </div>
         </nav>
@@ -89,16 +68,12 @@ export default function RootLayout({ children }: Props) {
             activeClassName="border-t-4 pt-2 border-t-fuchsia-600 text-fuchsia-600"
           >
             <IconHeart />
-            <div className="pt-1">My Favs</div>
+            <div className="pt-1">My Fav</div>
           </NavLink>
-          <NavLink
-            href="/login"
-            className="relative flex w-full flex-col items-center p-3"
-            activeClassName="border-t-4 pt-2 border-t-fuchsia-600 text-fuchsia-600"
-          >
+          <LoginOrProfileBottomNav>
             <IconUser />
             <div className="pt-1">Account</div>
-          </NavLink>
+          </LoginOrProfileBottomNav>
         </nav>
 
         <main className="mx-auto max-w-7xl px-4 py-8">{children}</main>
