@@ -3,7 +3,7 @@ import './globals.css';
 import { ReactNode, Suspense } from 'react';
 import { IconHeart, IconSearch, IconSparkles, IconUser } from '@tabler/icons-react';
 
-import Auth from './layout/Auth';
+import AuthListener from './headless/AuthListener';
 import HomeLink, { HomeLinkDumbComponent } from './layout/HomeLink';
 import LoginOrProfile, { LoginOrProfileBottomNav } from './layout/LoginOrProfile';
 import NavLink from './layout/NavLink';
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body>
-        <Auth />
+        <AuthListener />
 
         <nav className="pointer-events-none sticky top-0 z-30 w-full bg-white">
           <div className="mx-auto flex max-w-7xl items-center border-b px-3 py-3 lg:px-5 [&>*]:pointer-events-auto">

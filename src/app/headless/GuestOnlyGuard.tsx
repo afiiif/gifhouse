@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { useAuthStore } from '@/stores/auth';
 
-export default function GuestOnly() {
+export default function GuestOnlyGuard() {
   const { isLoading, user } = useAuthStore();
 
   const { replace } = useRouter();
