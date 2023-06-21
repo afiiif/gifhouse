@@ -22,6 +22,7 @@
     "@giphy/react-components": "^6.9.4",
     "@tabler/icons-react": "^2.22.0",
     "clsx": "~1.2.1",
+    "firebase": "^9.22.2",
     "next": "~13.4.6",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
