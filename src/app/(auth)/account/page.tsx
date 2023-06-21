@@ -27,7 +27,7 @@ export default function AccountPage() {
 
       <button
         type="button"
-        className="rounded bg-fuchsia-600 px-6 py-2 text-white hover:bg-fuchsia-500 focus:bg-fuchsia-700"
+        className="btn"
         onClick={() =>
           signOut().then(() => {
             router.replace('/');

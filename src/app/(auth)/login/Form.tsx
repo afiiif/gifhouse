@@ -42,7 +42,7 @@ export default function Form() {
           id={idEmail}
           name="email"
           type="email"
-          className="w-full rounded border px-4 py-2"
+          className="form-control"
           required
           readOnly={isLoading}
         />
@@ -53,16 +53,12 @@ export default function Form() {
           id={idPassword}
           name="password"
           type="password"
-          className="w-full rounded border px-4 py-2"
+          className="form-control"
           required
           readOnly={isLoading}
         />
       </label>
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="mt-4 w-full rounded bg-fuchsia-600 px-6 py-2 text-white hover:bg-fuchsia-500 focus:bg-fuchsia-700"
-      >
+      <button type="submit" disabled={isLoading} className="btn mt-4 w-full">
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
       <div className="pt-4 text-red-500">{errorMsg}</div>
