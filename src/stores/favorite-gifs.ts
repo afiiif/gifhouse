@@ -1,5 +1,5 @@
 import { GifResult } from '@giphy/js-fetch-api';
-import { collection, FirestoreError, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, FirestoreError, onSnapshot, query, where } from 'firebase/firestore';
 import { create } from 'zustand';
 
 import { db } from '@/utils/firebase';
@@ -11,11 +11,13 @@ export const useFavoriteGifsStore = create<{
   isLoading: boolean;
   error: FirestoreError | null;
   updatedAt: number | null;
+  sharingLink: { id: string; link: string } | null;
 }>(() => ({
   data: null,
   isLoading: true,
   error: null,
   updatedAt: null,
+  sharingLink: null,
 }));
 
 export const listenFavoriteGifs = (userId: string) => {
@@ -24,14 +26,14 @@ export const listenFavoriteGifs = (userId: string) => {
     collection(db, 'favorites'),
     where('userId', '==', userId),
   );
-  const unsubscribe = onSnapshot(
+  const unsubFavorites = onSnapshot(
     q,
     (querySnapshot) => {
       const gifs: { id: string; gif: Gif }[] = [];
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach((snapshot) => {
         gifs.push({
-          id: doc.id,
-          gif: doc.data().gif,
+          id: snapshot.id,
+          gif: snapshot.data().gif,
         });
       });
       useFavoriteGifsStore.setState({ isLoading: false, data: gifs, updatedAt: Date.now() });
@@ -40,5 +42,14 @@ export const listenFavoriteGifs = (userId: string) => {
       useFavoriteGifsStore.setState({ isLoading: false, error });
     },
   );
-  return unsubscribe;
+  const unsubSharingLinks = onSnapshot(doc(db, 'sharing-links', userId), (snapshot) => {
+    useFavoriteGifsStore.setState({
+      sharingLink: snapshot.exists() ? { id: snapshot.id, link: userId } : null,
+    });
+  });
+
+  return () => {
+    unsubFavorites();
+    unsubSharingLinks();
+  };
 };

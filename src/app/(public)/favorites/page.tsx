@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useAuthStore } from '@/stores/auth';
 
 import GifGrid from './GifGrid';
+import Sharing from './Sharing';
 
 export default function FavoritesPage() {
   const { isLoading, user } = useAuthStore();
@@ -27,7 +28,8 @@ export default function FavoritesPage() {
 
   return (
     <>
-      <h1 className="pb-6 text-2xl font-bold">My Favorites</h1>
+      <h1 className="mr-auto pb-6 text-2xl font-bold">My Favorites</h1>
+      <Sharing />
       <GifGrid />
     </>
   );
