@@ -1,7 +1,10 @@
 'use client';
 
 import { ReactNode } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { IconHeart, IconLogin, IconUserCircle } from '@tabler/icons-react';
+import clsx from 'clsx';
 
 import { useAuthStore } from '@/stores/auth';
 
@@ -58,15 +61,20 @@ export default function LoginOrProfile() {
 export function LoginOrProfileBottomNav({ children }: { children: ReactNode }) {
   const user = useAuthStore((state) => state.user);
 
+  const pathname = usePathname();
+
   if (!user) {
     return (
-      <NavLink
+      <Link
         href="/login"
-        className="relative flex w-full flex-col items-center p-3"
-        activeClassName="border-t-4 pt-2 border-t-fuchsia-600 text-fuchsia-600"
+        className={clsx(
+          'relative flex w-full flex-col items-center p-3',
+          (pathname === '/login' || pathname === '/register') &&
+            'border-t-4 border-t-fuchsia-600 pt-2 text-fuchsia-600',
+        )}
       >
         {children}
-      </NavLink>
+      </Link>
     );
   }
 

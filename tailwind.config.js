@@ -9,6 +9,16 @@ module.exports = {
   plugins: [
     plugin(({ addComponents, theme }) => {
       addComponents({
+        '.link': {
+          color: theme('colors.fuchsia.600'),
+          textDecoration: 'underline',
+        },
+        '.link:hover': {
+          color: theme('colors.fuchsia.500'),
+        },
+        '.link:focus': {
+          color: theme('colors.fuchsia.700'),
+        },
         '.btn': {
           backgroundColor: theme('colors.fuchsia.600'),
           color: theme('colors.white'),

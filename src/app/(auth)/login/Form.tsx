@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { useAuthStore } from '@/stores/auth';
@@ -61,7 +62,13 @@ export default function Form() {
       <button type="submit" disabled={isLoading} className="btn mt-4 w-full">
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
-      <div className="pt-4 text-red-500">{errorMsg}</div>
+      <div className="pt-4 text-red-500 empty:hidden">{errorMsg}</div>
+      <div className="pt-8">
+        Don't have an account?{' '}
+        <Link href="/register" className="link">
+          Register
+        </Link>
+      </div>
     </form>
   );
 }
