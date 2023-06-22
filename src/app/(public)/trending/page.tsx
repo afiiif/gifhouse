@@ -2,6 +2,10 @@ import dynamic from 'next/dynamic';
 
 const GifGrid = dynamic(() => import('./GifGrid'), { ssr: false });
 
+export const metadata = {
+  title: 'Trending GIFs | GifHouse+',
+};
+
 export default function TrendingPage() {
   return (
     <>

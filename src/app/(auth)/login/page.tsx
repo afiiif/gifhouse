@@ -2,6 +2,10 @@ import GuestOnlyGuard from '@/app/headless/GuestOnlyGuard';
 
 import Form from './Form';
 
+export const metadata = {
+  title: 'Login | GifHouse+',
+};
+
 export default function LoginPage() {
   return (
     <section className="mx-auto max-w-sm sm:pt-6 lg:pt-14">

@@ -1,6 +1,7 @@
 const globalRules = {
   'no-console': 'off',
   'no-underscore-dangle': 'off',
+  'no-restricted-exports': 'off',
 
   'react/jsx-props-no-spreading': 'off',
   'react/no-unescaped-entities': 'off',
