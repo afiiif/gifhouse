@@ -1,18 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { GifResult } from '@giphy/js-fetch-api';
 import { Grid } from '@giphy/react-components';
 
 import GifModal from '@/components/GifModal';
 import { useGifGridConfig } from '@/hooks/use-gif-grid-config';
+import { IGif } from '@/types';
 import { giphyFetch } from '@/utils/giphy';
 
 /* eslint-disable react/no-unstable-nested-components */
 export default function GifGrid() {
   const { width, columns, limit, isFetched, setIsFetched } = useGifGridConfig();
 
-  const [modalGif, setModalGif] = useState<GifResult['data']>();
+  const [modalGif, setModalGif] = useState<IGif>();
 
   return (
     <>

@@ -1,13 +1,11 @@
-import { GifResult } from '@giphy/js-fetch-api';
 import { collection, doc, FirestoreError, onSnapshot, query, where } from 'firebase/firestore';
 import { create } from 'zustand';
 
+import { IGif } from '@/types';
 import { db } from '@/utils/firebase';
 
-type Gif = GifResult['data'];
-
 export const useFavoriteGifsStore = create<{
-  data: { id: string; gif: Gif }[] | null;
+  data: { id: string; gif: IGif }[] | null;
   isLoading: boolean;
   error: FirestoreError | null;
   updatedAt: number | null;
@@ -21,7 +19,7 @@ export const useFavoriteGifsStore = create<{
 }));
 
 export const listenFavoriteGifs = (userId: string) => {
-  const q = query<{ userId: string; gif: GifResult['data'] }>(
+  const q = query<{ userId: string; gif: IGif }>(
     // @ts-ignore
     collection(db, 'favorites'),
     where('userId', '==', userId),
@@ -29,7 +27,7 @@ export const listenFavoriteGifs = (userId: string) => {
   const unsubFavorites = onSnapshot(
     q,
     (querySnapshot) => {
-      const gifs: { id: string; gif: Gif }[] = [];
+      const gifs: { id: string; gif: IGif }[] = [];
       querySnapshot.forEach((snapshot) => {
         gifs.push({
           id: snapshot.id,

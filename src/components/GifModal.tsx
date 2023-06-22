@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { GifResult } from '@giphy/js-fetch-api';
 import { Gif } from '@giphy/react-components';
 import { IconCircleX, IconHeart, IconHeartOff } from '@tabler/icons-react';
 import clsx from 'clsx';
@@ -8,11 +7,12 @@ import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore';
 
 import { useAuthStore } from '@/stores/auth';
 import { useFavoriteGifsStore } from '@/stores/favorite-gifs';
+import { IGif } from '@/types';
 import { db } from '@/utils/firebase';
 
 type Props = {
-  modalGif: GifResult['data'];
-  setModalGif: Dispatch<SetStateAction<GifResult['data'] | undefined>>;
+  modalGif: IGif;
+  setModalGif: Dispatch<SetStateAction<IGif | undefined>>;
 };
 export default function GifModal({ modalGif, setModalGif }: Props) {
   useEffect(() => {

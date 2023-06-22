@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { GifResult, ResultMeta, ResultPagination } from '@giphy/js-fetch-api';
+import { ResultMeta, ResultPagination } from '@giphy/js-fetch-api';
 import { Grid } from '@giphy/react-components';
 
 import GifModal from '@/components/GifModal';
 import { useGifGridConfig } from '@/hooks/use-gif-grid-config';
 import { useFavoriteGifsStore } from '@/stores/favorite-gifs';
+import { IGif } from '@/types';
 
 export default function GifGrid() {
   const { width, columns } = useGifGridConfig();
@@ -14,7 +15,7 @@ export default function GifGrid() {
   const favoritedGifs = useFavoriteGifsStore((state) => state.data?.map((item) => item.gif) || []);
   const updatedAt = useFavoriteGifsStore((state) => state.updatedAt);
 
-  const [modalGif, setModalGif] = useState<GifResult['data']>();
+  const [modalGif, setModalGif] = useState<IGif>();
 
   return (
     <>
