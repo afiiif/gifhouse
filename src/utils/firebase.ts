@@ -5,7 +5,9 @@ import {
   signInWithEmailAndPassword,
   signOut as signOutFirebase,
 } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { collection, doc, getFirestore, query, where } from 'firebase/firestore';
+
+import { IGif } from '@/types';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -29,3 +31,14 @@ export const signIn = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
 
 export const signOut = () => signOutFirebase(auth);
+
+export const queryFavorites = (userId: string) => {
+  const q = query<{ userId: string; gif: IGif }>(
+    // @ts-ignore
+    collection(db, 'favorites'),
+    where('userId', '==', userId),
+  );
+  return q;
+};
+
+export const querySharingLink = (userId: string) => doc(db, 'sharing-links', userId);

@@ -1,31 +1,26 @@
-import { collection, doc, FirestoreError, onSnapshot, query, where } from 'firebase/firestore';
+import { FirestoreError, onSnapshot } from 'firebase/firestore';
 import { create } from 'zustand';
 
 import { IGif } from '@/types';
-import { db } from '@/utils/firebase';
+import { queryFavorites, querySharingLink } from '@/utils/firebase';
 
 export const useFavoriteGifsStore = create<{
   data: { id: string; gif: IGif }[] | null;
   isLoading: boolean;
   error: FirestoreError | null;
   updatedAt: number | null;
-  sharingLink: { id: string; link: string } | null;
+  sharedLink: string | null;
 }>(() => ({
   data: null,
   isLoading: true,
   error: null,
   updatedAt: null,
-  sharingLink: null,
+  sharedLink: null,
 }));
 
 export const listenFavoriteGifs = (userId: string) => {
-  const q = query<{ userId: string; gif: IGif }>(
-    // @ts-ignore
-    collection(db, 'favorites'),
-    where('userId', '==', userId),
-  );
   const unsubFavorites = onSnapshot(
-    q,
+    queryFavorites(userId),
     (querySnapshot) => {
       const gifs: { id: string; gif: IGif }[] = [];
       querySnapshot.forEach((snapshot) => {
@@ -40,10 +35,8 @@ export const listenFavoriteGifs = (userId: string) => {
       useFavoriteGifsStore.setState({ isLoading: false, error });
     },
   );
-  const unsubSharingLinks = onSnapshot(doc(db, 'sharing-links', userId), (snapshot) => {
-    useFavoriteGifsStore.setState({
-      sharingLink: snapshot.exists() ? { id: snapshot.id, link: userId } : null,
-    });
+  const unsubSharingLinks = onSnapshot(querySharingLink(userId), (snapshot) => {
+    useFavoriteGifsStore.setState({ sharedLink: snapshot.exists() ? snapshot.data().url : null });
   });
 
   return () => {

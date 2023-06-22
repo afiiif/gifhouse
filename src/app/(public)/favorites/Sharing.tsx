@@ -2,14 +2,14 @@
 
 import { useId } from 'react';
 import Link from 'next/link';
-import { deleteDoc, doc, setDoc } from 'firebase/firestore';
+import { deleteDoc, setDoc } from 'firebase/firestore';
 
 import { useAuthStore } from '@/stores/auth';
 import { useFavoriteGifsStore } from '@/stores/favorite-gifs';
-import { db } from '@/utils/firebase';
+import { querySharingLink } from '@/utils/firebase';
 
 export default function Sharing() {
-  const link = useFavoriteGifsStore((state) => state.sharingLink?.link);
+  const link = useFavoriteGifsStore((state) => state.sharedLink);
   const href = `${window.location.origin}/c/${link}`;
 
   const idCheckbox = useId();
@@ -22,13 +22,15 @@ export default function Sharing() {
             id={idCheckbox}
             checked={!!link}
             onChange={() => {
-              const userId = useAuthStore.getState().user!.uid;
+              const user = useAuthStore.getState().user!;
               if (link) {
-                deleteDoc(doc(db, 'sharing-links', userId));
+                deleteDoc(querySharingLink(user.uid));
                 return;
               }
-              setDoc(doc(db, 'sharing-links', userId), {
+              setDoc(querySharingLink(user.uid), {
+                url: `${user.uid}-${Date.now()}`,
                 createdAt: new Date(),
+                author: { email: user.email },
               });
             }}
             type="checkbox"
