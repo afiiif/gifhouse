@@ -59,7 +59,7 @@ export default function GifModal({ modalGif, setModalGif }: Props) {
         <button
           type="button"
           className={clsx(
-            'mt-4 flex w-full items-center justify-center gap-2 rounded border-2 border-white p-2 text-white',
+            'mt-4 flex w-full items-center justify-center gap-2 rounded-md border-2 border-white p-2 text-white',
             favorited ? 'hover:border-orange-600' : 'hover:border-pink-600',
           )}
           onClick={() => {
