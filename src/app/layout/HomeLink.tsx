@@ -13,7 +13,7 @@ export function HomeLinkDumbComponent({ keyword }: Props) {
     <Link
       href="/"
       className={clsx(
-        'group relative mr-auto flex items-center p-1.5 text-2xl transition-all',
+        'animate__animated animate__bounceIn group relative mr-auto flex items-center p-1.5 text-2xl transition-all',
         keyword ? '-top-14 md:top-0' : 'top-0',
       )}
     >
