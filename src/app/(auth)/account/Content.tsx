@@ -25,6 +25,8 @@ export default function Content() {
     <>
       <h1 className="pb-6 text-2xl font-bold">Account</h1>
 
+      <div className="pb-16">Email: {user.email}</div>
+
       <button
         type="button"
         className="btn"
